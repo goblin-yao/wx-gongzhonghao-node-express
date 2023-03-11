@@ -6,6 +6,8 @@ async function WXMsgChecker(content, option) {
     if (option.appid) {
       url = `http://api.weixin.qq.com/wxa/msg_sec_check?from_appid=${option.appid}`;
     }
+    console.log("url--->", url);
+
     const result = await axios.post(
       url,
       {

@@ -1,20 +1,29 @@
-const axios = require("axios");
-async function customSendMessage(appid, mess) {
+const request = require("request");
+
+function customSendMessage(appid, mess) {
   let url = `http://api.weixin.qq.com/cgi-bin/message/custom/send`;
   if (appid) {
     url = `http://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=${appid}`;
   }
-  try {
-    const result = await axios.post(url, mess, {
-      headers: { "Content-Type": "application/json" },
-      timeout: 30000,
-    });
-    console.log("message/custom/send result=>", result.data);
-    return result.data;
-  } catch (error) {
-    console.log("message/custom/send error", error);
-    return -1;
-  }
+  console.log("url--->", url);
+  return new Promise((resolve, reject) => {
+    request(
+      {
+        method: "POST",
+        url: `http://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=${appid}`,
+        body: JSON.stringify(mess),
+      },
+      function (error, response) {
+        if (error) {
+          console.log("接口返回错误", error);
+          reject(error.toString());
+        } else {
+          console.log("接口返回内容", response.body);
+          resolve(response.body);
+        }
+      }
+    );
+  });
 }
 
 module.exports = customSendMessage;
