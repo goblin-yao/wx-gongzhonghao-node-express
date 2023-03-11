@@ -10,7 +10,7 @@ function customSendMessage(appid, mess) {
     request(
       {
         method: "POST",
-        url: `http://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=${appid}`,
+        url,
         body: JSON.stringify(mess),
       },
       function (error, response) {
