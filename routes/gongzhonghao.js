@@ -5,7 +5,7 @@ const customSendMessage = require("../utils/msg_send");
 const proxyToAzure = require("../proxytoazure");
 
 // 微信消息推送 https://developers.weixin.qq.com/miniprogram/dev/wxcloudrun/src/development/weixin/callback.html
-router.post("/messages/send", async (req, res) => {
+router.post("/message/send", async (req, res) => {
   // 从 header 中x-wx-appid取appid ，如果 x-wx-from-appid 不存在，则不是资源复用场景，可以直接传空字符串，使用环境所属账号发起云调用
   const appid = req.headers["x-wx-appid"] || ""; //x-wx-appid
   // unionid=>
